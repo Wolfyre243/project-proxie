@@ -5,6 +5,8 @@ const fs = require('node:fs'); // Node's native file system module.
 const path = require('node:path'); // Node's native path utility module.
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
 
+const app = require('./app'); // Express server.
+
 const token = process.env.TOKEN;
 
 // Create a new Discord client
@@ -55,3 +57,6 @@ for (const file of eventFiles) {
 
 // Log in to Discord with your client's token
 client.login(token);
+app.listen(process.env.PORT, () => {
+    console.log(`[INFO] Server is online!`);
+})
