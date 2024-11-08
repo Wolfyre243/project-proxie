@@ -1,9 +1,11 @@
 //------------------------------Declare Variables------------------------------------
+require('dotenv').config();
+
 const fs = require('node:fs'); // Node's native file system module.
 const path = require('node:path'); // Node's native path utility module.
 const { Client, Collection, GatewayIntentBits } = require('discord.js');
-const { token } = require('./config.json');
 
+const token = process.env.TOKEN;
 
 // Create a new Discord client
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
@@ -12,7 +14,6 @@ const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 // Adds a new property called "commands" to the client instance
 // This allows us to access our commands in other files.
 client.commands = new Collection(); // The collection class is an extension of the Map class, which we will be using to store commands
-client.spamCache = new Array(); // Create a place to store spam nuke IDs.
 
 // 1. Initiate & Read Commands
 const foldersPath = path.join(__dirname, 'commands'); // Constructs a path to the commands directory. "__dirname" is an environment variable for the root dir.
